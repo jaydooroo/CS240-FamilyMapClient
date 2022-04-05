@@ -3,15 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ejh61/FamilyMapProjects/MainActivity/app/src/main/res/drawable-anydpi/ic_stat_name.xml" value="0.1795" />
         <entry key="..\:/Users/ejh61/FamilyMapProjects/MainActivity/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.192" />
         <entry key="..\:/Users/ejh61/FamilyMapProjects/MainActivity/app/src/main/res/drawable/edge.xml" value="0.1" />
         <entry key="..\:/Users/ejh61/FamilyMapProjects/MainActivity/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/ejh61/FamilyMapProjects/MainActivity/app/src/main/res/drawable/loaction.xml" value="0.1795" />
+        <entry key="..\:/Users/ejh61/FamilyMapProjects/MainActivity/app/src/main/res/drawable/location1.xml" value="0.1795" />
+        <entry key="..\:/Users/ejh61/FamilyMapProjects/MainActivity/app/src/main/res/layout/activity_event.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/ejh61/FamilyMapProjects/MainActivity/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/ejh61/FamilyMapProjects/MainActivity/app/src/main/res/layout/activity_person.xml" value="0.25" />
+        <entry key="..\:/Users/ejh61/FamilyMapProjects/MainActivity/app/src/main/res/layout/activity_person.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/ejh61/FamilyMapProjects/MainActivity/app/src/main/res/layout/content_event.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/ejh61/FamilyMapProjects/MainActivity/app/src/main/res/layout/family_list_view.xml" value="0.3151041666666667" />
+        <entry key="..\:/Users/ejh61/FamilyMapProjects/MainActivity/app/src/main/res/layout/fragment_first.xml" value="0.1" />
         <entry key="..\:/Users/ejh61/FamilyMapProjects/MainActivity/app/src/main/res/layout/fragment_google_support_maps.xml" value="0.1" />
         <entry key="..\:/Users/ejh61/FamilyMapProjects/MainActivity/app/src/main/res/layout/fragment_login.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/ejh61/FamilyMapProjects/MainActivity/app/src/main/res/layout/fragment_map.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/ejh61/FamilyMapProjects/MainActivity/app/src/main/res/layout/fragment_second.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/ejh61/FamilyMapProjects/MainActivity/app/src/main/res/layout/life_event_view.xml" value="0.35348837209302325" />
         <entry key="..\:/Users/ejh61/FamilyMapProjects/MainActivity/app/src/main/res/layout/list_item_group.xml" value="0.22" />
         <entry key="..\:/Users/ejh61/FamilyMapProjects/MainActivity/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1355" />

@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -44,6 +46,10 @@ public class MapFragment extends Fragment {
     private Event selectedEvent;
     private List<Polyline> oldLines = new ArrayList<>();
 
+    // Event Activity helper variables
+    private Boolean IsEventActivity = false;
+    private Event eventActivity;
+
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
 
@@ -64,6 +70,27 @@ public class MapFragment extends Fragment {
             googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
            **/
+
+          if(IsEventActivity == true) {
+              selectedEvent = eventActivity;
+
+              // move Camera
+              LatLng selectedEventLocation = new LatLng(selectedEvent.getLatitude(),selectedEvent.getLongitude());
+              googleMap.moveCamera(CameraUpdateFactory.newLatLng(selectedEventLocation));
+
+
+              changeDynamicView( selectedEvent);
+              clearOldLines();
+              if(dataCache.isFamilyTreeLinesOn()) {
+                  familyLine(selectedEvent.getPersonID(), selectedEvent, 15, Color.GREEN, googleMap);
+              }
+              if (dataCache.isLifeStoryLinesOn()) {
+                  lifeStoryLine(selectedEvent.getPersonID(), 15, Color.YELLOW, googleMap);
+              }
+              if (dataCache.isSpousesLinesOn()) {
+                  spouseLine(selectedEvent.getPersonID(),selectedEvent,15,Color.RED,googleMap);
+              }
+          }
 
           googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
 
@@ -113,6 +140,15 @@ public class MapFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        // Event Activity (Not sure if it works, Not really sure if the map ready perform first or not)
+        Bundle arguments = getArguments();
+        if(arguments != null && arguments.containsKey("EVENT_KEY")) {
+            String eventActivityId = getArguments().getString("EVENT_KEY");
+            IsEventActivity = true;
+            eventActivity = dataCache.getEvents().get(eventActivityId);
+        }
+
+
         View view = inflater.inflate(R.layout.fragment_map,container,false);
 
         dynamicTextView = (TextView) view.findViewById(R.id.dynamicTextView);

@@ -51,9 +51,14 @@ public class PersonActivity extends AppCompatActivity {
        lastNameView.setText(person.getLastName());
 
        TextView genderView = findViewById(R.id.GenderInfo);
-       genderView.setText(person.getGender());
+       if(person.getGender().equals("f")) {
+           genderView.setText("Female");
+       }else {
+           genderView.setText("Male");
+       }
 
-        List<Event> eventList = dataCache.getPersonEvents().get(personId);
+
+        List<Event> eventList = findFilteredEvents(personId);
         List<Family> familyList = findFamilyMembers(personId);
 
         ExpandableListView expandableListView = findViewById(R.id.expandableListView);
@@ -183,6 +188,14 @@ public class PersonActivity extends AppCompatActivity {
 
             eventImageView.setImageResource(R.drawable.location);
 
+            eventListView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    eventActivityTransition(eventList.get(childPosition).getEventID());
+
+                }
+            });
+
         }
 
         private void initializeFamilyListView (View familyListView, final int childPosition) {
@@ -197,7 +210,7 @@ public class PersonActivity extends AppCompatActivity {
             TextView relationshipView = familyListView.findViewById(R.id.memberRelationship);
             relationshipView.setText(relationship);
 
-            ImageView imageView = familyListView.findViewById(R.id.eventImageView);
+            ImageView imageView = familyListView.findViewById(R.id.familyGenderImage);
 
             if(person.getGender().equals("f")) {
                 imageView.setImageResource(R.drawable.female);
@@ -209,13 +222,26 @@ public class PersonActivity extends AppCompatActivity {
             familyListView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(PersonActivity.this, "Asdasd", Toast.LENGTH_SHORT).show();
+
+                    personActivityTransition(familyList.get(childPosition).getPerson().getPersonID());
+
                 }
             });
 
         }
     }
 
+    private  List<Event> findFilteredEvents(String personId) {
+        List<Event> personEvents = dataCache.getPersonEvents().get(personId);
+        List<Event> filteredEvents = new LinkedList<Event>();
+
+        for(Event elem: personEvents) {
+            if (dataCache.getFilteredEvents().containsKey(elem.getEventID())) {
+                filteredEvents.add(elem);
+            }
+        }
+        return filteredEvents;
+    }
 
 
     private List<Family> findFamilyMembers(String personId) {
@@ -260,5 +286,18 @@ public class PersonActivity extends AppCompatActivity {
         return familyMembers;
     }
 
+    private void personActivityTransition(String personID) {
+
+        Intent intent = new Intent(PersonActivity.this, PersonActivity.class);
+        intent.putExtra("selectedPerson",personID);
+        startActivity(intent);
+    }
+
+    private void eventActivityTransition(String eventID) {
+
+        Intent intent = new Intent(PersonActivity.this, EventActivity.class);
+        intent.putExtra("selectedEvent",eventID);
+        startActivity(intent);
+    }
 
 }
