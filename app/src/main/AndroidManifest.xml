@@ -16,11 +16,21 @@
         android:theme="@style/Theme.MainActivity"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".EventActivity"
-            android:exported="false" />
+            android:name="UI.SearchActivity"
+            android:exported="false"
+            android:parentActivityName="UI.MainActivity"/>
         <activity
-            android:name=".PersonActivity"
-            android:exported="false" />
+            android:name="UI.SettingsActivity"
+            android:exported="false"
+            android:parentActivityName="UI.MainActivity"/>
+        <activity
+            android:name="UI.EventActivity"
+            android:exported="false"
+            android:parentActivityName="UI.MainActivity" />
+        <activity
+            android:name="UI.PersonActivity"
+            android:exported="false"
+            android:parentActivityName="UI.MainActivity" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -37,7 +47,7 @@
             android:value="AIzaSyCfo0QTmczMdEPvDKIG6GPnNycYtIV3d6U" />
 
         <activity
-            android:name=".MainActivity"
+            android:name="UI.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

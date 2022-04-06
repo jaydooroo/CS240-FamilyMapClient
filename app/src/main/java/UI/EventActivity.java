@@ -1,4 +1,4 @@
-package com.example.mainactivity;
+package UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -6,12 +6,11 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import com.example.mainactivity.R;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
-
-import model.Event;
-import model.Person;
 
 public class EventActivity extends AppCompatActivity {
 
@@ -36,6 +35,16 @@ public class EventActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().add(R.id.EventFrameLayout,mapFragment).commit();
         }
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
+        return true;
     }
 
 }

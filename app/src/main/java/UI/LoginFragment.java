@@ -1,4 +1,4 @@
-package com.example.mainactivity;
+package UI;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import com.example.mainactivity.R;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

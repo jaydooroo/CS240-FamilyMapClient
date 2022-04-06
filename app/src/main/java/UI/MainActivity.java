@@ -1,20 +1,22 @@
-package com.example.mainactivity;
+package UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.mainactivity.R;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
-
+import Data.DataCache;
 
 
 public class MainActivity extends AppCompatActivity implements LoginFragment.Listener{
 
-
+private DataCache dataCache = DataCache.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -33,6 +35,20 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Lis
             if(fragment instanceof LoginFragment) {
                 ((LoginFragment) fragment).registerListener(this);
             }
+        }
+    }
+
+    @Override
+    public void onResume() {
+
+        super.onResume();
+
+        Intent intent = getIntent();
+        if(dataCache.getAuthtoken() == null) {
+            this.getFragmentManager().popBackStack();
+            FragmentManager fragmentManager = this.getSupportFragmentManager();
+            Fragment fragment = createLoginFragment();
+                fragmentManager.beginTransaction().replace(R.id.fragmentFrameLayout,fragment).commit();
         }
     }
 

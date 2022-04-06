@@ -1,22 +1,23 @@
-package com.example.mainactivity;
+package UI;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.CameraUpdate;
+import com.example.mainactivity.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -28,9 +29,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.joanzapata.iconify.IconDrawable;
+import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
+import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
-import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,6 +47,7 @@ public class MapFragment extends Fragment {
     private ImageView dynamicImageView;
     private Event selectedEvent;
     private List<Polyline> oldLines = new ArrayList<>();
+    private GoogleMap gMap;
 
     // Event Activity helper variables
     private Boolean IsEventActivity = false;
@@ -66,6 +69,8 @@ public class MapFragment extends Fragment {
         public void onMapReady(GoogleMap googleMap) {
 
             setMarkers(googleMap);
+            gMap = googleMap;
+
           /**  LatLng sydney = new LatLng(-34, 151);
             googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
@@ -92,6 +97,7 @@ public class MapFragment extends Fragment {
               }
           }
 
+
           googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
 
               @Override
@@ -114,7 +120,18 @@ public class MapFragment extends Fragment {
           });
         }
 
+
     };
+
+    @Override
+    public void onCreate( Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+
+        Iconify.with(new FontAwesomeModule());
+        dataCache.filterEvents();
+    }
+
 
     /**
     public class DynamicLayout extends Activity {
@@ -149,6 +166,7 @@ public class MapFragment extends Fragment {
         }
 
 
+
         View view = inflater.inflate(R.layout.fragment_map,container,false);
 
         dynamicTextView = (TextView) view.findViewById(R.id.dynamicTextView);
@@ -167,9 +185,18 @@ public class MapFragment extends Fragment {
             }
         });
 
-        dataCache.filterEvents();
-
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (gMap != null) {
+            gMap.clear();
+            setMarkers(gMap);
+        }
+
     }
 
     @Override
@@ -331,6 +358,30 @@ public class MapFragment extends Fragment {
             return resultEvent;
         }
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu (Menu menu, MenuInflater inflater) {
+        if(IsEventActivity == false) {
+            super.onCreateOptionsMenu(menu, inflater);
+            inflater.inflate(R.menu.main_menu, menu);
+        }
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.searchMenuItem:
+                Intent intent1 = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent1);
+                return true;
+            case R.id.settingMenuItem:
+                Intent intent2 = new Intent(getActivity(), SettingsActivity.class);
+                startActivity(intent2);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
 }

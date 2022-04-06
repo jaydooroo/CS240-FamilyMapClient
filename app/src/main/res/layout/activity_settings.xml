@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="UI.SettingsActivity">
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        android:layout_marginLeft="5dp">
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="vertical">
+        <TextView
+            android:id="@+id/lifeStoryName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Life Story Lines"
+            android:textSize="17dp"/>
+
+            <TextView
+                android:id="@+id/lifeStoryDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SHOW LIFE STORY LINES"
+                android:textSize="13dp"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Switch
+            android:id="@+id/lifeStorySwitch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:checked="true"
+            android:switchMinWidth="56dp"
+            android:textOff="OFF"
+            android:textOn="ON" />
+    </TableRow>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#A6A1A1"/>
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        android:layout_marginLeft="5dp">
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/familyTreeName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Family Tree Lines"
+                android:textSize="17dp"/>
+
+            <TextView
+                android:id="@+id/FamilyTreeDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SHOW FAMILY TREE LINES"
+                android:textSize="13dp"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Switch
+            android:id="@+id/familyTreeSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:checked="true"
+            android:switchMinWidth="56dp"
+            android:textOff="OFF"
+            android:textOn="ON" />
+    </TableRow>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#A6A1A1"/>
+
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        android:layout_marginLeft="5dp">
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/spouseLinesName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Spouse Lines"
+                android:textSize="17dp"/>
+
+            <TextView
+                android:id="@+id/spouseLinesDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SHOW SPOUSE LINES"
+                android:textSize="13dp"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Switch
+            android:id="@+id/spouseLinesSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:checked="true"
+            android:switchMinWidth="56dp"
+            android:textOff="OFF"
+            android:textOn="ON" />
+    </TableRow>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#A6A1A1"/>
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        android:layout_marginLeft="5dp">
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/fathersSideName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Father's Side"
+                android:textSize="17dp"/>
+
+            <TextView
+                android:id="@+id/fathersSideDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FILTER BY FATHER'S SIDE OF FAMILY"
+                android:textSize="13dp"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Switch
+            android:id="@+id/fathersSideSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:checked="true"
+            android:switchMinWidth="56dp"
+            android:textOff="OFF"
+            android:textOn="ON" />
+    </TableRow>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#A6A1A1"/>
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        android:layout_marginLeft="5dp">
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/mothersSideName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mother's Side"
+                android:textSize="17dp"/>
+
+            <TextView
+                android:id="@+id/mothersSideDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FILTER BY MOTHER'S SIDE OF FAMILY"
+                android:textSize="13dp"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Switch
+            android:id="@+id/mothersSideSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:checked="true"
+            android:switchMinWidth="56dp"
+            android:textOff="OFF"
+            android:textOn="ON" />
+    </TableRow>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#A6A1A1"/>
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        android:layout_marginLeft="5dp">
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/maleEventsName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Male Events"
+                android:textSize="17dp"/>
+
+            <TextView
+                android:id="@+id/maleEventsDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FILTER EVENTS BASED ON GENDER"
+                android:textSize="13dp"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Switch
+            android:id="@+id/maleEventsSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:checked="true"
+            android:switchMinWidth="56dp"
+            android:textOff="OFF"
+            android:textOn="ON" />
+    </TableRow>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#A6A1A1"/>
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        android:layout_marginLeft="5dp">
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/femaleEventsName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Female Events"
+                android:textSize="17dp"/>
+
+            <TextView
+                android:id="@+id/femaleEventsDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FILTER EVENTS BASED ON GENDER"
+                android:textSize="13dp"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Switch
+            android:id="@+id/femaleEventsSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:checked="true"
+            android:switchMinWidth="56dp"
+            android:textOff="OFF"
+            android:textOn="ON" />
+    </TableRow>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#A6A1A1"/>
+
+    <TableRow
+        android:id="@+id/logoutText"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        android:layout_marginLeft="5dp">
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/logoutName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:textSize="17dp"/>
+
+            <TextView
+                android:id="@+id/logoutDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="RETURN TO LOGIN SCREEN"
+                android:textSize="13dp"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </TableRow>
+
+
+
+</TableLayout>

@@ -38,11 +38,11 @@ public class DataCache {
     //settings
     private boolean isLifeStoryLinesOn = true;
     private boolean isFamilyTreeLinesOn = true;
-    private boolean isSpousesLinesOn = false;
+    private boolean isSpousesLinesOn = true;
     private boolean isFatherSideOn = true;
     private boolean isMotherSideOn = true;
     private boolean isMaleEventsOn = true;
-    private boolean isFemaleEventsOn = false;
+    private boolean isFemaleEventsOn = true;
 
 
     private Map<String, Event> filteredEvents;

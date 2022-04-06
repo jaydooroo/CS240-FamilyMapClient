@@ -14,7 +14,6 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-
 import request.AllEventRequest;
 import request.AllPersonRequest;
 import request.LoginRequest;
@@ -57,8 +56,8 @@ public class ServerProxy {
             throw new IOException("Http Access Error");
         }
            return  loginResult;
-
     }
+
 
     public RegisterResult register(RegisterRequest registerRequest) throws IOException {
 
@@ -70,7 +69,6 @@ public class ServerProxy {
         http.setDoOutput(true);
         http.addRequestProperty("Accept", "application/json");
 
-      //  http.connect();
         convertIntoJson(http,registerRequest);
 
 
@@ -87,9 +85,6 @@ public class ServerProxy {
            throw new IOException("Http Access Error");
        }
 
-
-
-//        return null;
     }
 
     public AllPersonResult getAllPeople(AllPersonRequest allPersonRequest) throws IOException {
@@ -101,22 +96,20 @@ public class ServerProxy {
         http.setDoOutput(false);
         http.addRequestProperty("Authorization", allPersonRequest.getAuthtoken());
         http.addRequestProperty("Accept", "application/json");
-       // http.connect();
-
 
         AllPersonResult allPersonResult = null;
         if(http.getResponseCode() == HttpURLConnection.HTTP_OK) {
             Reader repBody = new InputStreamReader(http.getInputStream());
 
-            // convert Json into Result class format
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             allPersonResult = gson.fromJson(repBody, AllPersonResult.class);
         }
         else {
+
             throw new IOException("Http Access Error");
         }
-        return  allPersonResult;
 
+        return  allPersonResult;
     }
 
     public AllEventResult getAllEvents(AllEventRequest allEventRequest) throws IOException{
@@ -127,17 +120,16 @@ public class ServerProxy {
         http.setDoOutput(false);
         http.addRequestProperty("Authorization", allEventRequest.getAuthtoken());
 
-        //http.connect();
         AllEventResult allEventResult;
         if(http.getResponseCode() == HttpURLConnection.HTTP_OK) {
 
             Reader repBody = new InputStreamReader(http.getInputStream());
 
-            // convert Json into Result class format
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             allEventResult = gson.fromJson(repBody, AllEventResult.class);
         }
         else {
+
             throw new IOException("Http Access Error");
         }
 
@@ -155,8 +147,6 @@ public class ServerProxy {
         sw.write(respondJson);
         sw.flush();
         os.close();
-
     }
-
 
 }
