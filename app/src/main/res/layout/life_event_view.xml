@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@id/eventLocationView"
+        android:layout_toEndOf="@id/eventPersonNameView"
         android:orientation="vertical"
         android:paddingLeft="47dp"
         tools:ignore="NotSibling">
@@ -31,7 +31,7 @@
             tools:text="Click on a marker to see event details" />
 
         <TextView
-            android:id="@+id/eventLocationView"
+            android:id="@+id/eventPersonNameView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|left"

@@ -48,6 +48,7 @@ public class MapFragment extends Fragment {
     private Event selectedEvent;
     private List<Polyline> oldLines = new ArrayList<>();
     private GoogleMap gMap;
+    HashMap<String, Float> colorsData = new HashMap<String, Float>();
 
     // Event Activity helper variables
     private Boolean IsEventActivity = false;
@@ -212,7 +213,6 @@ public class MapFragment extends Fragment {
     public void setMarkers(GoogleMap googleMap) {
         int colorIndex = 0;
 
-        HashMap<String, Float> colorsData = new HashMap<String, Float>();
         float colors[] = {
                 BitmapDescriptorFactory.HUE_RED,
                 BitmapDescriptorFactory.HUE_ORANGE,
@@ -227,12 +227,12 @@ public class MapFragment extends Fragment {
         };
 
         for (Event elem: dataCache.getFilteredEvents().values()) {
-            if(!colorsData.containsKey(elem.getEventType())) {
-                colorsData.put(elem.getEventType(),colors[colorIndex%10]);
+            if(!colorsData.containsKey(elem.getEventType().toLowerCase())) {
+                colorsData.put(elem.getEventType().toLowerCase(),colors[colorIndex%10]);
                 colorIndex++;
             }
             Marker marker = googleMap.addMarker(new MarkerOptions().position(new LatLng(elem.getLatitude(), elem.getLongitude())).
-                    icon(BitmapDescriptorFactory.defaultMarker(colorsData.get(elem.getEventType()))));
+                    icon(BitmapDescriptorFactory.defaultMarker(colorsData.get(elem.getEventType().toLowerCase()))));
             marker.setTag(elem);
         }
 

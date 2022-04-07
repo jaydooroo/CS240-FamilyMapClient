@@ -172,7 +172,7 @@ public class PersonActivity extends AppCompatActivity {
             lifeEventTypeView.setText(event.getEventType()+ ": " + event.getCity() + ", " + event.getCountry()
                     + "(" + event.getYear() + ")");
 
-            TextView eventLocationView = eventListView.findViewById(R.id.eventLocationView);
+            TextView eventLocationView = eventListView.findViewById(R.id.eventPersonNameView);
             eventLocationView.setText(person.getLastName() + " " + person.getFirstName());
 
             ImageView eventImageView = eventListView.findViewById(R.id.eventImageView);

@@ -35,6 +35,9 @@ public class DataCache {
     private String personID;
     private String authtoken;
 
+    //for testing
+    private List<Family> familyList;
+
     //settings
     private boolean isLifeStoryLinesOn = true;
     private boolean isFamilyTreeLinesOn = true;
@@ -141,6 +144,14 @@ public class DataCache {
         this.authtoken = null;
         this.filteredEvents= null;
         this.filteredPeople = null;
+
+        isLifeStoryLinesOn = true;
+        isFamilyTreeLinesOn = true;
+        isSpousesLinesOn = true;
+        isFatherSideOn = true;
+        isMotherSideOn = true;
+        isMaleEventsOn = true;
+        isFemaleEventsOn = true;
     }
 
     public Map<String, Person> getPeople() {
@@ -263,6 +274,17 @@ public class DataCache {
         for(Event elem: personEvents.get(personID)) {
             filteredEvents.put(elem.getEventID(),elem);
         }
+
+        // spouse setting
+
+        String spouseID = people.get(personID).getSpouseID();
+        if(!spouseID.equals("")) {
+            filteredPeople.put(spouseID, people.get(spouseID));
+            for (Event elem : personEvents.get(spouseID)) {
+                filteredEvents.put(elem.getEventID(), elem);
+            }
+        }
+
 
         //father side filter
         if(isFatherSideOn) {
