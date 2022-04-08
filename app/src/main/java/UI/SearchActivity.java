@@ -73,7 +73,7 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    private void eventSearch(String query, List<Event> searchEventList) {
+    public void eventSearch(String query, List<Event> searchEventList) {
 
         for(int i = 0; i < eventList.size(); i++) {
             String type = eventList.get(i).getEventType();
@@ -94,7 +94,7 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    private void personSearch(String query, List<Person> searchPersonList) {
+    public void personSearch(String query, List<Person> searchPersonList) {
         for(int i = 0; i < personList.size(); i++) {
             String firstName = personList.get(i).getFirstName();
             String lastName = personList.get(i).getLastName();

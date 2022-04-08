@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -14,6 +15,7 @@ import model.Event;
 public class DataCache {
 
     private static DataCache instance = new DataCache();
+
     public static DataCache getInstance() {
         return instance;
     }
@@ -25,7 +27,7 @@ public class DataCache {
 
     private Map<String, Person> people;
     private Map<String, Event> events;
-    private Map<String, List<Event>> personEvents ;
+    private Map<String, List<Event>> personEvents;
     private HashSet<String> paternalAncestors;
     private HashSet<String> maternalAncestors;
 
@@ -67,7 +69,6 @@ public class DataCache {
     public void setFilteredEvents(Map<String, Event> filteredEvents) {
         this.filteredEvents = filteredEvents;
     }
-
 
 
     public boolean isLifeStoryLinesOn() {
@@ -127,7 +128,6 @@ public class DataCache {
     }
 
 
-
     public static void setInstance(DataCache instance) {
         DataCache.instance = instance;
     }
@@ -142,7 +142,7 @@ public class DataCache {
         this.username = null;
         this.personID = null;
         this.authtoken = null;
-        this.filteredEvents= null;
+        this.filteredEvents = null;
         this.filteredPeople = null;
 
         isLifeStoryLinesOn = true;
@@ -152,6 +152,9 @@ public class DataCache {
         isMotherSideOn = true;
         isMaleEventsOn = true;
         isFemaleEventsOn = true;
+
+        //for testing
+        familyList = null;
     }
 
     public Map<String, Person> getPeople() {
@@ -218,67 +221,73 @@ public class DataCache {
         this.authtoken = authtoken;
     }
 
+    public List<Family> getFamilyList() {
+        return familyList;
+    }
 
-    public void sortEventLists () {
+    public void setFamilyList(List<Family> familyList) {
+        this.familyList = familyList;
+    }
 
-        for(List<Event> elem: personEvents.values()) {
+
+
+    public void sortEventLists() {
+
+        for (List<Event> elem : personEvents.values()) {
             Collections.sort(elem, new ListComparator());
         }
     }
 
-    private class  ListComparator implements Comparator {
+    private class ListComparator implements Comparator {
 
         @Override
         public int compare(Object o1, Object o2) {
 
 
-            int year1 = ((Event)o1).getYear();
-            int year2 = ((Event)o2).getYear();
+            int year1 = ((Event) o1).getYear();
+            int year2 = ((Event) o2).getYear();
 
             String eventType1 = ((Event) o1).getEventType();
             String eventType2 = ((Event) o2).getEventType();
 
-            if(eventType1.toLowerCase().equals("birth")) {
+            if (eventType1.toLowerCase().equals("birth")) {
                 return -1;
-            }
-            else if (eventType2.toLowerCase().equals("birth")) {
+            } else if (eventType2.toLowerCase().equals("birth")) {
                 return 1;
             }
 
-            if(eventType1.toLowerCase().equals("death")) {
-                    return 1;
-            }
-            else if(eventType2.toLowerCase().equals("death")){
-                    return -1;
-            }
-
-
-            if(year1 > year2){
+            if (eventType1.toLowerCase().equals("death")) {
                 return 1;
-            }
-            else if(year1 < year2) {
+            } else if (eventType2.toLowerCase().equals("death")) {
                 return -1;
-            }else {
+            }
+
+
+            if (year1 > year2) {
+                return 1;
+            } else if (year1 < year2) {
+                return -1;
+            } else {
                 // If it is not sorted by years sorted by string.
-               return eventType1.compareTo(eventType2);
+                return eventType1.compareTo(eventType2);
             }
         }
     }
 
-    public void filterEvents () {
+    public void filterEvents() {
         filteredEvents = new HashMap<String, Event>();
         filteredPeople = new HashMap<String, Person>();
 
         //initial setting for user.
-        filteredPeople.put(personID,people.get(personID));
-        for(Event elem: personEvents.get(personID)) {
-            filteredEvents.put(elem.getEventID(),elem);
+        filteredPeople.put(personID, people.get(personID));
+        for (Event elem : personEvents.get(personID)) {
+            filteredEvents.put(elem.getEventID(), elem);
         }
 
         // spouse setting
 
         String spouseID = people.get(personID).getSpouseID();
-        if(!spouseID.equals("")) {
+        if (!spouseID.equals("")) {
             filteredPeople.put(spouseID, people.get(spouseID));
             for (Event elem : personEvents.get(spouseID)) {
                 filteredEvents.put(elem.getEventID(), elem);
@@ -287,65 +296,111 @@ public class DataCache {
 
 
         //father side filter
-        if(isFatherSideOn) {
-            for(String elem:paternalAncestors) {
+        if (isFatherSideOn) {
+            for (String elem : paternalAncestors) {
                 filteredPeople.put(elem, people.get(elem));
-                for(Event eventElem: personEvents.get(elem)) {
-                    filteredEvents.put(eventElem.getEventID(),eventElem);
+                for (Event eventElem : personEvents.get(elem)) {
+                    filteredEvents.put(eventElem.getEventID(), eventElem);
                 }
             }
         }
-        if(isMotherSideOn) {
-            for(String elem:maternalAncestors) {
+        if (isMotherSideOn) {
+            for (String elem : maternalAncestors) {
                 filteredPeople.put(elem, people.get(elem));
-                for(Event eventElem: personEvents.get(elem)) {
-                    filteredEvents.put(eventElem.getEventID(),eventElem);
+                for (Event eventElem : personEvents.get(elem)) {
+                    filteredEvents.put(eventElem.getEventID(), eventElem);
                 }
             }
         }
-        if(!isMaleEventsOn()) {
+        if (!isMaleEventsOn()) {
             List<String> peopleId = new ArrayList<String>();
             List<String> eventsId = new ArrayList<String>();
 
-            for(Person elemPerson: filteredPeople.values()) {
-                if(elemPerson.getGender().equals("m")) {
+            for (Person elemPerson : filteredPeople.values()) {
+                if (elemPerson.getGender().equals("m")) {
                     peopleId.add(elemPerson.getPersonID());
-                    for(Event elem: personEvents.get(elemPerson.getPersonID())) {
+                    for (Event elem : personEvents.get(elemPerson.getPersonID())) {
                         eventsId.add(elem.getEventID());
                     }
                 }
             }
 
-            for( String elem: peopleId) {
+            for (String elem : peopleId) {
                 filteredPeople.remove(elem);
             }
 
-            for(String elem: eventsId) {
+            for (String elem : eventsId) {
                 filteredEvents.remove(elem);
             }
         }
-        if(!isFemaleEventsOn) {
+        if (!isFemaleEventsOn) {
             List<String> peopleId = new ArrayList<String>();
             List<String> eventsId = new ArrayList<String>();
 
-            for(Person elemPerson: filteredPeople.values()) {
-                if(elemPerson.getGender().equals("f")) {
+            for (Person elemPerson : filteredPeople.values()) {
+                if (elemPerson.getGender().equals("f")) {
                     peopleId.add(elemPerson.getPersonID());
-                    for(Event elem: personEvents.get(elemPerson.getPersonID())) {
+                    for (Event elem : personEvents.get(elemPerson.getPersonID())) {
                         eventsId.add(elem.getEventID());
                     }
                 }
             }
 
-            for( String elem: peopleId) {
+            for (String elem : peopleId) {
                 filteredPeople.remove(elem);
             }
 
-            for(String elem: eventsId) {
+            for (String elem : eventsId) {
                 filteredEvents.remove(elem);
             }
         }
 
     }
 
+//For testing
+
+    public void setFamilyRelationship(String personId) {
+        familyList = findFamilyMembers(personId);
+    }
+
+    private List<Family> findFamilyMembers(String personId) {
+
+        Person person = people.get(personId);
+        List<Family> familyMembers = new LinkedList<Family>();
+
+        if (!person.getFatherID().equals("")) {
+            Family family = new Family("Father", people.get(person.getFatherID()));
+            familyMembers.add(family);
+        }
+
+        if (!person.getMotherID().equals("")) {
+
+            Family family = new Family("Mother", people.get(person.getMotherID()));
+            familyMembers.add(family);
+        }
+        if (!person.getSpouseID().equals("")) {
+            Family family = new Family("Spouse", people.get(person.getSpouseID()));
+            familyMembers.add(family);
+        }
+
+        if (person.getGender().equals("f")) {
+            for (Person elemPerson : people.values()) {
+                if (elemPerson.getMotherID().equals(personId)) {
+                    Family family = new Family("Child", elemPerson);
+                    familyMembers.add(family);
+                }
+            }
+        } else {
+            for (Person elemPerson : people.values()) {
+                if (elemPerson.getFatherID().equals(personId)) {
+
+                    Family family = new Family("Child", elemPerson);
+                    familyMembers.add(family);
+                }
+            }
+
+        }
+
+        return familyMembers;
+    }
 }

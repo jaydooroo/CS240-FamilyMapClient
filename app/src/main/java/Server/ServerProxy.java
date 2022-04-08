@@ -16,10 +16,12 @@ import java.net.URL;
 
 import request.AllEventRequest;
 import request.AllPersonRequest;
+import request.ClearRequest;
 import request.LoginRequest;
 import request.RegisterRequest;
 import result.AllEventResult;
 import result.AllPersonResult;
+import result.ClearResult;
 import result.LoginResult;
 import result.RegisterResult;
 
@@ -30,6 +32,42 @@ public class ServerProxy {
     public ServerProxy(String serverHost, String serverPort) {
         this.serverHost = serverHost;
         this.serverPort = serverPort;
+    }
+
+    //For testing, Created clear
+
+    public ClearResult clear() throws IOException {
+
+        URL url = new URL("http://" + serverHost + ":" + serverPort + "/clear");
+
+        HttpURLConnection http = (HttpURLConnection)url.openConnection();
+
+        http.setRequestMethod("POST");
+        http.setDoOutput(false);
+        http.connect();
+        ClearResult clearResult = null;
+        if(http.getResponseCode() == HttpURLConnection.HTTP_OK) {
+            System.out.println("Successfully cleared");
+            Reader repBody = new InputStreamReader(http.getInputStream());
+
+            // convert Json into Result class format
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+             clearResult = gson.fromJson(repBody, ClearResult.class);
+             System.out.println(repBody.toString());
+
+        }
+        else {
+            System.out.println("Error: " + http.getResponseMessage());
+
+            Reader repBody = new InputStreamReader(http.getInputStream());
+
+            // convert Json into Result class format
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            clearResult = gson.fromJson(repBody, ClearResult.class);
+            System.out.println(repBody.toString());
+        }
+
+        return clearResult;
     }
 
     public LoginResult login(LoginRequest loginRequest) throws IOException {
